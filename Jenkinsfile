@@ -8,8 +8,19 @@ pipeline {
     }
 
     stage('Log') {
-      steps {
-        sh 'ls -la'
+      parallel {
+        stage('Log') {
+          steps {
+            sh 'ls -la'
+          }
+        }
+
+        stage('b4z-test-app-front') {
+          steps {
+            sh 'npm i'
+          }
+        }
+
       }
     }
 
